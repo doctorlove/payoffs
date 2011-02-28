@@ -1,15 +1,13 @@
+#####################
+# By Fran Buontempo #
+#####################
+
 import pylab as p
 
 def long_put(E):
 	S = [E*t/10.0 for t in range(0,21)]
-	P = []
-	for x in S:
-		val = 0
-		if x<E:
-			val = E-x
-		P.append(val)
-
-	return S, P
+	P = map( lambda x : max(E-x, 0), S )
+	return S,P
 
 def short_put(E):
 	S, P = long_put(E)
@@ -17,14 +15,8 @@ def short_put(E):
 
 def long_call(E):
 	S = [E*t/10.0 for t in range(0,21)]
-	P = []
-	for x in S:
-		val = 0
-		if x>E:
-			val = x-E
-		P.append(val)
-
-	return S, P
+	P = map( lambda x : max(x-E, 0), S )
+	return S,P
 
 def short_call(E):
 	S, P = long_call(E)
